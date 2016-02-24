@@ -85,5 +85,32 @@ public class App {
       model.put("template", "templates/category-tasks-form.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
+
+    post("/tasks/:id", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      Task task = Task.find(Integer.parseInt(request.params("id")));
+      Category category = Category.find(task.getCategoryId());
+      String description = request.queryParams("description");
+      task.update("description");
+      model.put("template", "templates/task.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/tasks/:id/delete", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      Task task = Task.find(Integer.parseInt(request.params("id")));
+      task.delete();
+      model.put("template", "templates/task.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    // post("categories/:id/update", (request, response) -> {
+    //   HashMap<String, Object> model = new HashMap<String, Object>();
+    //   Category category = Category.find(Integer.parseInt(request.params("id")));
+    //   String name = request.queryParams("name");
+    //   category.update(name);
+    //   response.redirect("/categories/" + Integer.toString(category.getId()));
+    //   return null;
+    // });
   }
 }

@@ -4,5 +4,18 @@
  <h3>$task.getDescription()</a></h3>
 #end
 
+<h1>Update $category.getName()</h1>
+
+<form action="/categories/$category.getId()/update" method="post">
+  <input id="id" name="id" type="hidden" value="$category.getId()">
+
+  <div class="form-group">
+    <label for="name">Update Category</label>
+    <input id="name" name="name" type="text">
+  </div>
+
+  <button type="submit" class="btn btn-warning">Update Category</button>
+</form>
+
 <a href="/categories/$category.getId()/tasks/new">Add a new task</a>
 <a href="/">Return to Main Page</a>
