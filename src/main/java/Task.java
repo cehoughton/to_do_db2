@@ -108,8 +108,8 @@ public void delete() {
       con.createQuery(joinDeleteQuery)
         .addParameter("taskId", this.getId())
         .executeUpdate();
+    }
   }
-}
 
 
 }
